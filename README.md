@@ -1,75 +1,80 @@
-# React + TypeScript + Vite
+# TaskFlow Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend for **TaskFlow**, an evolving fullstack project focused on learning and applying TypeScript in real-world frontend scenarios.
 
-Currently, two official plugins are available:
+The project is intentionally developed incrementally: complexity is introduced when the application has a reason to need it.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Goals
 
-## React Compiler
+- Learn TypeScript deeply through React.
+- Model frontend data with strong types.
+- Understand the difference between API, domain and form models.
+- Build type-safe API communication.
+- Apply runtime validation where appropriate.
+- Evolve toward maintainable frontend architecture without premature abstractions.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the ESLint configuration
+- React 19
+- TypeScript
+- Vite
+- pnpm
+- Vitest — planned
+- Zod — planned
+- TaskFlow API — backend
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Architecture Direction
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```text
+API response
+    ↓
+Runtime validation
+    ↓
+TaskResponse
+    ↓
+Mapping
+    ↓
+Task
+    ↓
+React UI
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Frontend types are not assumed to be identical to backend or database models.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Learning Focus
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+TypeScript concepts will be introduced as real problems appear:
 
+- Union types
+- Type composition
+- Utility types
+- Generics
+- Type guards
+- API contracts
+- Runtime validation
+- Type-safe API clients
+- Reusable typed components
+
+The goal is not to use advanced TypeScript everywhere, but to understand **when it provides real value**.
+
+## Development
+
+```bash
+pnpm install
+pnpm dev
 ```
+
+Build and lint:
+
+```bash
+pnpm build
+pnpm lint
+```
+
+## Project Status
+
+See [`PROGRESS.md`](./PROGRESS.md) for the current state and next steps.
+
+---
+
+**Focus:** React · TypeScript · Frontend Engineering
