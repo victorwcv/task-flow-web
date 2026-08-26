@@ -1,4 +1,5 @@
-import type { Task, TaskResponse } from "../types/task";
+import type { TaskResponse } from "../schemas/task";
+import type { Task } from "../types/task";
 
 export function mapTask(response: TaskResponse): Task {
   return {

@@ -1,22 +1,14 @@
-type TaskStatus = "todo" | "in-progress" | "done";
+import { TASK_STATUSES } from "../constans/constants";
+import type { TaskResponse } from "../schemas/task";
 
-type TaskResponse = {
-  id: string;
-  title: string;
-  description: string | null;
-  status: TaskStatus;
-  createdAt: string;
-  updatedAt: string;
-};
+export type TaskStatus = (typeof TASK_STATUSES)[number];
 
-type TaskFormValues = {
+export type TaskFormValues = {
   title: string;
   description: string;
 };
 
-type Task = Omit<TaskResponse, "createdAt" | "updatedAt"> & {
+export type Task = Omit<TaskResponse, "createdAt" | "updatedAt"> & {
   createdAt: Date;
   updatedAt: Date;
 };
-
-export type { TaskStatus, TaskResponse, TaskFormValues, Task };

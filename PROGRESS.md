@@ -8,10 +8,10 @@
 
 ## Current State
 
-**Stage:** 1 — TypeScript Foundations  
-**Milestone:** Initial React + TypeScript setup  
-**Status:** 🟢 In progress  
-**Next:** Type-safe API client
+**Stage:** 2 — API Integration
+**Milestone:** Type-safe API client
+**Status:** 🟢 Completed
+**Next:** React + Advanced TypeScript
 
 ---
 
@@ -30,11 +30,11 @@
 
 ### Stage 2 — API Integration
 
-- [ ] Typed `fetch` client
-- [ ] Generic API methods
-- [ ] Task API integration
-- [ ] API error modeling
-- [ ] Runtime response validation
+- [x] Typed `fetch` client
+- [x] Generic API methods
+- [x] Task API integration
+- [x] API error modeling
+- [x] Runtime response validation
 
 ### Stage 3 — React + Advanced TypeScript
 
@@ -71,8 +71,21 @@ The next major goal is connecting the frontend to **TaskFlow API** through a typ
 
 ---
 
-## Learning Rule
+## Technical Decisions
 
-Prefer understanding and solving TypeScript problems before introducing libraries or abstractions.
+### Stage 1 — Key Decisions
 
-**Learn → Apply → Challenge → Refactor**
+- Domain models are kept separate from API response models.
+- `TaskResponse` represents the external API contract, while `Task` represents the frontend domain model.
+- `Omit` is used to compose `Task` from `TaskResponse` while replacing date fields with `Date`.
+- API date strings are converted into `Date` objects through a dedicated `mapTask()` function.
+- `TaskStatus` uses a union type to restrict valid task states.
+- The initial frontend structure remains minimal, adding folders only when a responsibility requires them.
+
+### Stage 2 — Key Decisions
+
+- API responses are validated at runtime with Zod.
+- Zod schemas are the source of truth for external response types.
+- Generic `get()` infers its return type from the provided schema.
+- API models (`TaskResponse`) are mapped into frontend models (`Task`).
+- HTTP errors are represented by `ApiError`.
