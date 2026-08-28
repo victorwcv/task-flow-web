@@ -6,8 +6,8 @@ export const taskResponseSchema = z.object({
   title: z.string(),
   description: z.string().nullable(),
   status: z.enum(TASK_STATUSES),
-  createdAt: z.iso.date(),
-  updatedAt: z.iso.date(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
 });
 
 export const taskResponseListSchema = z.array(taskResponseSchema);

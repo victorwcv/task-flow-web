@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import type { Task } from "./types/task";
+import type { Task, TaskFormValues } from "./types/task";
 import "./App.css";
-import { getTasks } from "./api/taskApi";
+import { getTasks, createTask } from "./api/taskApi";
 import { mapTask } from "./utils/mapTask";
 import { ApiError } from "./api/client";
 import { z } from "zod";
+import { TaskForm } from "./components/TaskForm";
+import { TaskCard } from "./components/TaskCard";
 
 function App() {
   const [tasks, setTasksData] = useState<Task[]>([]);
@@ -28,9 +30,23 @@ function App() {
       }
     };
     fetchTasks();
-  }, [tasks]);
+  }, []);
 
-  return <></>;
+  const saveTask = async (data: TaskFormValues) => {
+    const taskSaved = await createTask(data);
+    setTasksData((prev) => [...prev, mapTask(taskSaved)]);
+  };
+
+  return (
+    <>
+      <TaskForm onSubmit={saveTask} />
+      <div>
+        {tasks.map((task) => (
+          <TaskCard key={task.id} task={task} />
+        ))}
+      </div>
+    </>
+  );
 }
 
 export default App;
