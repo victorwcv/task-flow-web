@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+const API_URL = "http://localhost:3000";
+
 export class ApiError extends Error {
   status: number;
 
@@ -14,14 +16,41 @@ export async function get<S extends z.ZodType>(
   endpoint: string,
   schema: S,
 ): Promise<z.infer<S>> {
-  const url = `http://localhost:3000${endpoint}`;
-  const response = await fetch(url);
+  const response = await fetch(`${API_URL}${endpoint}`);
+
   if (!response.ok) {
     throw new ApiError(
       `HTTP error! status: ${response.status}`,
       response.status,
     );
   }
+
   const data: unknown = await response.json();
+
+  return schema.parse(data);
+}
+
+export async function post<TBody, S extends z.ZodType>(
+  endpoint: string,
+  body: TBody,
+  schema: S,
+): Promise<z.infer<S>> {
+  const response = await fetch(`${API_URL}${endpoint}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    throw new ApiError(
+      `HTTP error! status: ${response.status}`,
+      response.status,
+    );
+  }
+
+  const data: unknown = await response.json();
+
   return schema.parse(data);
 }
