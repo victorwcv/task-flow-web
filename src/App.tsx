@@ -8,6 +8,18 @@ import { z } from "zod";
 import { TaskForm } from "./components/TaskForm";
 import { TaskCard } from "./components/TaskCard";
 
+function handleError(error: unknown) {
+  if (error instanceof ApiError) {
+    console.error(`HTTP error - ${error.status}: ${error.message}`);
+  } else if (error instanceof z.ZodError) {
+    console.error(`Validation error - ${error.message}`, error.issues);
+  } else if (error instanceof Error) {
+    console.error(error.message);
+  } else {
+    console.error("An unknown error occurred");
+  }
+}
+
 function App() {
   const [tasks, setTasksData] = useState<Task[]>([]);
 
@@ -18,15 +30,7 @@ function App() {
         const tasksData = data.map(mapTask);
         setTasksData(tasksData);
       } catch (error) {
-        if (error instanceof ApiError) {
-          console.error(`HTTP error - ${error.status}: ${error.message}`);
-        } else if (error instanceof z.ZodError) {
-          console.error(`Validation error - ${error.message}`, error.issues);
-        } else if (error instanceof Error) {
-          console.error(error.message);
-        } else {
-          console.error("An unknown error occurred");
-        }
+        handleError(error);
       }
     };
     fetchTasks();
