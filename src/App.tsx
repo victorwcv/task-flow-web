@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import type { Task, TaskFormValues } from "./types/task";
 import "./App.css";
 import { getTasks, createTask } from "./api/taskApi";
-import { mapTask } from "./utils/mapTask";
 import { ApiError } from "./api/client";
 import { z } from "zod";
 import { TaskForm } from "./components/TaskForm";
 import { TaskCard } from "./components/TaskCard";
+import type { Task, TaskFormValues } from "./domain/task/types";
 
 function handleError(error: unknown) {
-  if (error instanceof ApiError) {
+  if (isApiError(error)) {
     console.error(`HTTP error - ${error.status}: ${error.message}`);
   } else if (error instanceof z.ZodError) {
     console.error(`Validation error - ${error.message}`, error.issues);
@@ -20,14 +19,25 @@ function handleError(error: unknown) {
   }
 }
 
+function isApiError(error: unknown): error is ApiError {
+  if (typeof error !== "object" || error === null) {
+    return false;
+  }
+  return (
+    "status" in error &&
+    typeof error.status === "number" &&
+    "message" in error &&
+    typeof error.message === "string"
+  );
+}
+
 function App() {
   const [tasks, setTasksData] = useState<Task[]>([]);
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const data = await getTasks();
-        const tasksData = data.map(mapTask);
+        const tasksData = await getTasks();
         setTasksData(tasksData);
       } catch (error) {
         handleError(error);
@@ -37,8 +47,12 @@ function App() {
   }, []);
 
   const saveTask = async (data: TaskFormValues) => {
-    const taskSaved = await createTask(data);
-    setTasksData((prev) => [...prev, mapTask(taskSaved)]);
+    try {
+      const taskSaved = await createTask(data);
+      setTasksData((prev) => [...prev, taskSaved]);
+    } catch (error) {
+      handleError(error);
+    }
   };
 
   return (

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TASK_STATUSES } from "../constans/constants";
+import { TASK_STATUSES } from "../../domain/task/constants";
 
 export const taskResponseSchema = z.object({
   id: z.string(),
