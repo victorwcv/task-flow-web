@@ -17,7 +17,7 @@
 
 ## Roadmap
 
-### Stage 1 — TypeScript Foundations
+### Stage 1 — TypeScript Foundations ✅
 
 - [x] React + TypeScript project setup
 - [x] Component props
@@ -28,29 +28,109 @@
 - [x] Data mapping (`TaskResponse` → `Task`)
 - [x] Initial frontend structure
 
-### Stage 2 — API Integration
+---
+
+### Stage 2 — API Integration ✅
 
 - [x] Typed `fetch` client
 - [x] Generic API methods
-- [x] Task API integration
+- [x] GET / POST integration
 - [x] API error modeling
-- [x] Runtime response validation
+- [x] Runtime response validation with Zod
+- [x] Error handling
+- [x] API → Domain mapping
+- [x] Domain / API separation
+- [x] CORS configuration
+- [x] API integration tests
+- [x] Production build validation
 
-### Stage 3 — React + Advanced TypeScript
+---
 
-- [ ] Typed forms
-- [ ] Event typing
-- [ ] Reusable components
-- [ ] Type guards
-- [ ] Advanced generics
-- [ ] Derived types
+### Stage 3 — Functional Frontend 🚧
 
-### Stage 4 — Frontend Architecture
+**Objective:** Complete TaskFlow Web as a functional frontend connected to the API.
 
+### Task Management
+
+- [x] List tasks
+- [x] Create task
+- [ ] Delete task
+- [ ] Edit task
+- [ ] Change task status
+- [ ] Refresh / synchronize task list
+
+### UI States
+
+- [ ] Loading state
+- [ ] Error state
+- [ ] Empty state
+- [ ] Form validation
+- [ ] Success feedback
+- [ ] Action feedback
+
+### React + TypeScript
+
+Apply advanced TypeScript concepts only when they solve real problems during implementation.
+
+- [x] Typed forms
+- [x] Event typing
+- [x] Type guards
+- [x] Derived types
+- [x] Generics
+- [ ] Advanced component props where useful
+- [ ] Derived UI state
+- [ ] Typed UI state management
+
+---
+
+## Stage 4 — Frontend Architecture
+
+**Objective:** Refactor and improve the architecture based on real problems discovered while building the application.
+
+- [ ] Review component responsibilities
+- [ ] Review domain / API boundaries
+- [ ] Extract reusable hooks where justified
 - [ ] Server state management
+- [ ] Cache / refetch strategy
+- [ ] Evaluate TanStack Query or another solution if justified
+- [ ] Improve API client where necessary
+- [ ] Review API contracts
 - [ ] Shared API contracts
 - [ ] Generated types
-- [ ] Architectural review
+- [ ] Final architectural review
+
+> Do not introduce abstractions, libraries, or architectural patterns before there is a real problem that justifies them.
+
+---
+
+## Stage 5 — Production Polish
+
+**Objective:** Prepare TaskFlow Web for real-world usage and deployment.
+
+### UX / UI
+
+- [ ] UI polish
+- [ ] Responsive design
+- [ ] Accessibility
+- [ ] Confirmation dialogs
+- [ ] Improved loading states
+- [ ] Improved error handling
+- [ ] Notifications / feedback
+
+### Testing
+
+- [ ] Component tests
+- [ ] Integration tests
+- [ ] End-to-end tests
+
+### Production
+
+- [ ] Environment variables
+- [ ] Production configuration
+- [ ] Production build
+- [ ] Docker
+- [ ] Deployment
+- [ ] Final README
 
 ---
 

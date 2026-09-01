@@ -8,7 +8,7 @@ import { TaskCard } from "./components/TaskCard";
 import type { Task, TaskFormValues } from "./domain/task/types";
 
 function handleError(error: unknown) {
-  if (isApiError(error)) {
+  if (error instanceof ApiError) {
     console.error(`HTTP error - ${error.status}: ${error.message}`);
   } else if (error instanceof z.ZodError) {
     console.error(`Validation error - ${error.message}`, error.issues);
@@ -17,18 +17,6 @@ function handleError(error: unknown) {
   } else {
     console.error("An unknown error occurred");
   }
-}
-
-function isApiError(error: unknown): error is ApiError {
-  if (typeof error !== "object" || error === null) {
-    return false;
-  }
-  return (
-    "status" in error &&
-    typeof error.status === "number" &&
-    "message" in error &&
-    typeof error.message === "string"
-  );
 }
 
 function App() {
