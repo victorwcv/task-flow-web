@@ -1,15 +1,17 @@
-import type { Task } from "../types/task";
+import type { Task } from "../domain/task/types";
 
 type TaskCardProps = {
   task: Task;
+  onDelete: (id: string) => void;
 };
 
-export const TaskCard = ({ task }: TaskCardProps) => {
+export const TaskCard = ({ task, onDelete }: TaskCardProps) => {
   return (
-    <div>
-      <p>{task.title}</p>
-      {task.description && <p>{task.description}</p>}
+    <div className="card">
+      <strong>{task.title}</strong>
+      <p>{task.description || "-"}</p>
       <p>{task.status}</p>
+      <button onClick={() => onDelete(task.id)}>❌</button>
     </div>
   );
 };

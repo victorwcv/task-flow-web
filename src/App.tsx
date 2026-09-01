@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { getTasks, createTask } from "./api/taskApi";
+import { getTasks, createTask, deleteTask } from "./api/taskApi";
 import { ApiError } from "./api/client";
 import { z } from "zod";
 import { TaskForm } from "./components/TaskForm";
@@ -34,7 +34,7 @@ function App() {
     fetchTasks();
   }, []);
 
-  const saveTask = async (data: TaskFormValues) => {
+  const handleSave = async (data: TaskFormValues) => {
     try {
       const taskSaved = await createTask(data);
       setTasksData((prev) => [...prev, taskSaved]);
@@ -43,12 +43,21 @@ function App() {
     }
   };
 
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteTask(id);
+      setTasksData((prev) => prev.filter((t) => t.id !== id));
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
   return (
     <>
-      <TaskForm onSubmit={saveTask} />
+      <TaskForm onSubmit={handleSave} />
       <div>
         {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} />
+          <TaskCard key={task.id} task={task} onDelete={handleDelete} />
         ))}
       </div>
     </>

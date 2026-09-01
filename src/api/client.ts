@@ -12,7 +12,7 @@ export class ApiError extends Error {
   }
 }
 
-export async function get<S extends z.ZodType>(
+export async function apiGet<S extends z.ZodType>(
   endpoint: string,
   schema: S,
 ): Promise<z.infer<S>> {
@@ -30,7 +30,7 @@ export async function get<S extends z.ZodType>(
   return schema.parse(data);
 }
 
-export async function post<TBody, S extends z.ZodType>(
+export async function apiPost<TBody, S extends z.ZodType>(
   endpoint: string,
   body: TBody,
   schema: S,
@@ -53,4 +53,17 @@ export async function post<TBody, S extends z.ZodType>(
   const data: unknown = await response.json();
 
   return schema.parse(data);
+}
+
+export async function apiDelete(endpoint: string): Promise<void> {
+  const response = await fetch(`${API_URL}${endpoint}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new ApiError(
+      `HTTP error! status: ${response.status}`,
+      response.status,
+    );
+  }
 }
