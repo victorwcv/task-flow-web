@@ -67,3 +67,28 @@ export async function apiDelete(endpoint: string): Promise<void> {
     );
   }
 }
+
+export async function apiPatch<TBody, S extends z.ZodType>(
+  endpoint: string,
+  body: TBody,
+  schema: S,
+): Promise<z.infer<S>> {
+  const response = await fetch(`${API_URL}${endpoint}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    throw new ApiError(
+      `HTTP error! status: ${response.status}`,
+      response.status,
+    );
+  }
+
+  const data: unknown = await response.json();
+
+  return schema.parse(data);
+}

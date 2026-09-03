@@ -14,3 +14,11 @@ export const taskResponseListSchema = z.array(taskResponseSchema);
 
 export type TaskResponse = z.infer<typeof taskResponseSchema>;
 export type TaskResponseList = z.infer<typeof taskResponseListSchema>;
+
+export const updateTaskSchema = z.object({
+  title: z.string().optional(),
+  description: z.string().optional(),
+  status: z.enum(TASK_STATUSES).optional(),
+});
+
+export type UpdateTaskInput = z.infer<typeof updateTaskSchema>;

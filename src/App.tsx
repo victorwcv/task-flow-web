@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { getTasks, createTask, deleteTask } from "./api/taskApi";
+import { getTasks, createTask, deleteTask, updateTask } from "./api/taskApi";
 import { ApiError } from "./api/client";
 import { z } from "zod";
 import { TaskForm } from "./components/TaskForm";
@@ -21,6 +21,7 @@ function handleError(error: unknown) {
 
 function App() {
   const [tasks, setTasksData] = useState<Task[]>([]);
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -36,6 +37,17 @@ function App() {
 
   const handleSave = async (data: TaskFormValues) => {
     try {
+      if (editingTask) {
+        const updatedTask = await updateTask(editingTask.id, data);
+
+        setTasksData((prev) =>
+          prev.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
+        );
+
+        setEditingTask(null);
+        return;
+      }
+
       const taskSaved = await createTask(data);
       setTasksData((prev) => [...prev, taskSaved]);
     } catch (error) {
@@ -52,12 +64,33 @@ function App() {
     }
   };
 
+  const handleEdit = (task: Task) => {
+    setEditingTask(task);
+  };
+
   return (
     <>
-      <TaskForm onSubmit={handleSave} />
+      <TaskForm
+        key={editingTask?.id ?? "create"}
+        onSubmit={handleSave}
+        onCancel={editingTask ? () => setEditingTask(null) : undefined}
+        initialValues={
+          editingTask
+            ? {
+                title: editingTask.title,
+                description: editingTask.description ?? "",
+              }
+            : undefined
+        }
+      />
       <div>
         {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} onDelete={handleDelete} />
+          <TaskCard
+            key={task.id}
+            task={task}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+          />
         ))}
       </div>
     </>
