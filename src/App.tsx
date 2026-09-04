@@ -6,6 +6,7 @@ import { z } from "zod";
 import { TaskForm } from "./components/TaskForm";
 import { TaskCard } from "./components/TaskCard";
 import type { Task, TaskFormValues } from "./domain/task/types";
+import type { TaskStatus } from "./domain/task/constants";
 
 function handleError(error: unknown) {
   if (error instanceof ApiError) {
@@ -68,6 +69,18 @@ function App() {
     setEditingTask(task);
   };
 
+  const handleStatusChange = async (id: string, status: TaskStatus) => {
+    try {
+      const updatedTask = await updateTask(id, { status });
+
+      setTasksData((prev) =>
+        prev.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
+      );
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
   return (
     <>
       <TaskForm
@@ -90,6 +103,7 @@ function App() {
             task={task}
             onDelete={handleDelete}
             onEdit={handleEdit}
+            onStatusChange={handleStatusChange}
           />
         ))}
       </div>
