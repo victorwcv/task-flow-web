@@ -23,6 +23,7 @@ function handleError(error: unknown) {
 function App() {
   const [tasks, setTasksData] = useState<Task[]>([]);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -31,6 +32,8 @@ function App() {
         setTasksData(tasksData);
       } catch (error) {
         handleError(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchTasks();
@@ -96,17 +99,21 @@ function App() {
             : undefined
         }
       />
-      <div>
-        {tasks.map((task) => (
-          <TaskCard
-            key={task.id}
-            task={task}
-            onDelete={handleDelete}
-            onEdit={handleEdit}
-            onStatusChange={handleStatusChange}
-          />
-        ))}
-      </div>
+      {isLoading ? (
+        <p>Cargando tareas...</p>
+      ) : (
+        <div>
+          {tasks.map((task) => (
+            <TaskCard
+              key={task.id}
+              task={task}
+              onDelete={handleDelete}
+              onEdit={handleEdit}
+              onStatusChange={handleStatusChange}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 }
