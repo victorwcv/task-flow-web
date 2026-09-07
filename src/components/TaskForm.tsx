@@ -1,26 +1,26 @@
 import type { SubmitEvent } from "react";
 import { useState } from "react";
-import type { TaskFormValues } from "../domain/task/types";
+import type { Task, TaskFormValues } from "../domain/task/types";
 
 type TaskFormProps = {
-  initialValues?: TaskFormValues;
-  onSubmit: (data: TaskFormValues) => void;
+  editingTask: Task | null;
+  onCreate: (data: TaskFormValues) => void;
+  onEdit: (id: string, data: TaskFormValues) => void;
   onCancel?: () => void;
 };
 
 export const TaskForm = ({
-  onSubmit,
-  initialValues,
+  onCreate,
+  onEdit,
+  editingTask,
   onCancel,
 }: TaskFormProps) => {
-  const [formData, setFormData] = useState<TaskFormValues>(
-    initialValues ?? {
-      title: "",
-      description: "",
-    },
-  );
+  const [formData, setFormData] = useState<TaskFormValues>({
+    title: editingTask?.title ?? "",
+    description: editingTask?.description ?? "",
+  });
 
-  const isEditing = initialValues !== undefined;
+  const isEditing = editingTask !== null;
 
   const handleChange = <K extends keyof TaskFormValues>(
     key: K,
@@ -31,11 +31,15 @@ export const TaskForm = ({
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit(formData);
-    setFormData({
-      title: "",
-      description: "",
-    });
+    if (isEditing) {
+      onEdit(editingTask.id, formData);
+    } else {
+      onCreate(formData);
+    }
+    setFormData({ title: "", description: "" });
+    if (onCancel) {
+      onCancel();
+    }
   };
 
   return (

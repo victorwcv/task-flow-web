@@ -1,115 +1,52 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
-import { getTasks, createTask, deleteTask, updateTask } from "./api/taskApi";
-import { ApiError } from "./api/client";
-import { z } from "zod";
 import { TaskForm } from "./components/TaskForm";
 import { TaskCard } from "./components/TaskCard";
-import type { Task, TaskFormValues } from "./domain/task/types";
-import type { TaskStatus } from "./domain/task/constants";
-
-function handleError(error: unknown) {
-  if (error instanceof ApiError) {
-    console.error(`HTTP error - ${error.status}: ${error.message}`);
-  } else if (error instanceof z.ZodError) {
-    console.error(`Validation error - ${error.message}`, error.issues);
-  } else if (error instanceof Error) {
-    console.error(error.message);
-  } else {
-    console.error("An unknown error occurred");
-  }
-}
+import type { Task } from "./domain/task/types";
+import { useTasks } from "./hooks/useTasks";
 
 function App() {
-  const [tasks, setTasksData] = useState<Task[]>([]);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const tasksData = await getTasks();
-        setTasksData(tasksData);
-      } catch (error) {
-        handleError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchTasks();
-  }, []);
-
-  const handleSave = async (data: TaskFormValues) => {
-    try {
-      if (editingTask) {
-        const updatedTask = await updateTask(editingTask.id, data);
-
-        setTasksData((prev) =>
-          prev.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
-        );
-
-        setEditingTask(null);
-        return;
-      }
-
-      const taskSaved = await createTask(data);
-      setTasksData((prev) => [...prev, taskSaved]);
-    } catch (error) {
-      handleError(error);
-    }
-  };
-
-  const handleDelete = async (id: string) => {
-    try {
-      await deleteTask(id);
-      setTasksData((prev) => prev.filter((t) => t.id !== id));
-    } catch (error) {
-      handleError(error);
-    }
-  };
+  const {
+    tasks,
+    isLoading,
+    error,
+    refetch,
+    deleteElement,
+    createElement,
+    updateElement,
+    updateStatus,
+  } = useTasks();
 
   const handleEdit = (task: Task) => {
     setEditingTask(task);
-  };
-
-  const handleStatusChange = async (id: string, status: TaskStatus) => {
-    try {
-      const updatedTask = await updateTask(id, { status });
-
-      setTasksData((prev) =>
-        prev.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
-      );
-    } catch (error) {
-      handleError(error);
-    }
   };
 
   return (
     <>
       <TaskForm
         key={editingTask?.id ?? "create"}
-        onSubmit={handleSave}
+        onCreate={createElement}
+        onEdit={updateElement}
         onCancel={editingTask ? () => setEditingTask(null) : undefined}
-        initialValues={
-          editingTask
-            ? {
-                title: editingTask.title,
-                description: editingTask.description ?? "",
-              }
-            : undefined
-        }
+        editingTask={editingTask}
       />
       {isLoading ? (
         <p>Cargando tareas...</p>
+      ) : error ? (
+        <div>
+          <p>{error}</p>
+          <button onClick={refetch}>Reintentar</button>
+        </div>
       ) : (
         <div>
           {tasks.map((task) => (
             <TaskCard
               key={task.id}
               task={task}
-              onDelete={handleDelete}
+              onDelete={deleteElement}
               onEdit={handleEdit}
-              onStatusChange={handleStatusChange}
+              onStatusChange={updateStatus}
             />
           ))}
         </div>
