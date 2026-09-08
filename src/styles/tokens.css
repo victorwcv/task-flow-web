@@ -1,0 +1,82 @@
+:root {
+  /* =========================================================
+     Colors
+     ========================================================= */
+
+  --stellan-color-background: #f7f8fc;
+  --stellan-color-surface: #ffffff;
+  --stellan-color-surface-subtle: #f0f2f7;
+
+  --stellan-color-text: #171a24;
+  --stellan-color-text-muted: #686d7a;
+
+  --stellan-color-border: #e3e6ed;
+
+  --stellan-color-primary: #635bff;
+  --stellan-color-primary-hover: #5148e5;
+
+  --stellan-color-success: #22a06b;
+  --stellan-color-warning: #d99000;
+  --stellan-color-danger: #e5484d;
+
+  --stellan-color-accent: #a78bfa;
+
+  /* =========================================================
+     Spacing
+     ========================================================= */
+
+  --stellan-spacing-micro: 4px;
+  --stellan-spacing-tight: 8px;
+  --stellan-spacing-compact: 12px;
+  --stellan-spacing-default: 16px;
+  --stellan-spacing-section: 24px;
+  --stellan-spacing-large: 32px;
+  --stellan-spacing-major: 48px;
+
+  /* =========================================================
+     Radius
+     ========================================================= */
+
+  --stellan-radius-sm: 4px;
+  --stellan-radius-md: 8px;
+  --stellan-radius-lg: 12px;
+  --stellan-radius-pill: 999px;
+
+  /* =========================================================
+     Typography
+     ========================================================= */
+
+  --stellan-font-family-base: Inter, system-ui, sans-serif;
+
+  --stellan-font-size-xs: 12px;
+  --stellan-font-size-sm: 14px;
+  --stellan-font-size-md: 16px;
+  --stellan-font-size-lg: 18px;
+  --stellan-font-size-xl: 24px;
+  --stellan-font-size-2xl: 30px;
+
+  --stellan-font-weight-regular: 400;
+  --stellan-font-weight-medium: 500;
+  --stellan-font-weight-semibold: 600;
+  --stellan-font-weight-bold: 700;
+
+  --stellan-line-height-tight: 1.2;
+  --stellan-line-height-normal: 1.5;
+  --stellan-line-height-relaxed: 1.6;
+
+  /* =========================================================
+     Shadows
+     ========================================================= */
+
+  --stellan-shadow-sm: 0 1px 2px rgb(23 26 36 / 0.06);
+  --stellan-shadow-md: 0 4px 12px rgb(23 26 36 / 0.08);
+  --stellan-shadow-lg: 0 8px 24px rgb(23 26 36 / 0.1);
+
+  /* =========================================================
+     Transitions
+     ========================================================= */
+
+  --stellan-transition-fast: 120ms ease;
+  --stellan-transition-normal: 200ms ease;
+  --stellan-transition-slow: 300ms ease;
+}
