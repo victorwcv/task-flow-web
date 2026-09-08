@@ -4,15 +4,17 @@ import type { Task, TaskFormValues } from "../domain/task/types";
 
 type TaskFormProps = {
   editingTask: Task | null;
+  isMutating: boolean;
   onCreate: (data: TaskFormValues) => void;
   onEdit: (id: string, data: TaskFormValues) => void;
   onCancel?: () => void;
 };
 
 export const TaskForm = ({
+  editingTask,
+  isMutating,
   onCreate,
   onEdit,
-  editingTask,
   onCancel,
 }: TaskFormProps) => {
   const [formData, setFormData] = useState<TaskFormValues>({
@@ -31,6 +33,10 @@ export const TaskForm = ({
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!formData.title.trim()) {
+      return;
+    }
+
     if (isEditing) {
       onEdit(editingTask.id, formData);
     } else {
@@ -65,11 +71,15 @@ export const TaskForm = ({
             onChange={(e) => handleChange("description", e.target.value)}
           />
         </div>
-        <button type="submit">
-          {isEditing ? "Guardar cambios" : "Crear tarea"}
+        <button type="submit" disabled={isMutating}>
+          {isMutating
+            ? "Guardando..."
+            : isEditing
+              ? "Guardar cambios"
+              : "Crear tarea"}
         </button>
         {onCancel && (
-          <button type="button" onClick={onCancel}>
+          <button type="button" onClick={onCancel} disabled={isMutating}>
             Cancelar
           </button>
         )}

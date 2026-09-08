@@ -9,6 +9,7 @@ export function useTasks() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [reloadKey, setReloadKey] = useState(0);
+  const [isMutating, setIsMutating] = useState(false);
 
   useEffect(() => {
     let ignore = false;
@@ -46,24 +47,32 @@ export function useTasks() {
   };
 
   const deleteElement = async (id: string) => {
+    setIsMutating(true);
+
     try {
       await deleteTask(id);
       setTasks((prev) => prev.filter((t) => t.id !== id));
     } catch (error) {
       handleError(error);
+    } finally {
+      setIsMutating(false);
     }
   };
 
   const createElement = async (data: TaskFormValues) => {
+    setIsMutating(true);
     try {
       const taskSaved = await createTask(data);
       setTasks((prev) => [...prev, taskSaved]);
     } catch (error) {
       handleError(error);
+    } finally {
+      setIsMutating(false);
     }
   };
 
   const updateElement = async (id: string, data: TaskFormValues) => {
+    setIsMutating(true);
     try {
       const updatedTask = await updateTask(id, data);
 
@@ -72,10 +81,13 @@ export function useTasks() {
       );
     } catch (error) {
       handleError(error);
+    } finally {
+      setIsMutating(false);
     }
   };
 
   const updateStatus = async (id: string, status: TaskStatus) => {
+    setIsMutating(true);
     try {
       const updatedTask = await updateTask(id, { status });
 
@@ -84,6 +96,8 @@ export function useTasks() {
       );
     } catch (error) {
       handleError(error);
+    } finally {
+      setIsMutating(false);
     }
   };
 
@@ -91,6 +105,7 @@ export function useTasks() {
     tasks,
     isLoading,
     error,
+    isMutating,
     refetch,
     deleteElement,
     createElement,
