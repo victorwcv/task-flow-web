@@ -1,0 +1,97 @@
+/* =========================================================
+   Reset
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--stellan-font-family-base);
+  line-height: var(--stellan-line-height-normal);
+  color: var(--stellan-color-text);
+  background: var(--stellan-color-background);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--stellan-color-background);
+  color: var(--stellan-color-text);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   Typography
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--stellan-font-weight-semibold);
+  line-height: var(--stellan-line-height-tight);
+}
+
+p {
+  line-height: var(--stellan-line-height-normal);
+}
+
+/* =========================================================
+   Form elements
+   ========================================================= */
+
+input,
+textarea,
+select {
+  color: inherit;
+}
+
+/* =========================================================
+   Accessibility
+   ========================================================= */
+
+:focus-visible {
+  outline: 2px solid var(--stellan-color-primary);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   Selection
+   ========================================================= */
+
+::selection {
+  background: var(--stellan-color-primary);
+  color: var(--stellan-color-surface);
+}

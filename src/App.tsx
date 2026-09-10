@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import { TaskForm } from "./components/TaskForm";
 import { TaskCard } from "./components/TaskCard";
 import type { Task } from "./domain/task/types";
