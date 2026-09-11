@@ -1,6 +1,7 @@
 import type { SubmitEvent } from "react";
 import { useState } from "react";
 import type { Task, TaskFormValues } from "../domain/task/types";
+import { Button } from "./ui/Button";
 
 type TaskFormProps = {
   editingTask: Task | null;
@@ -71,17 +72,17 @@ export const TaskForm = ({
             onChange={(e) => handleChange("description", e.target.value)}
           />
         </div>
-        <button type="submit" disabled={isMutating}>
+        <Button type="submit" disabled={isMutating}>
           {isMutating
             ? "Guardando..."
             : isEditing
               ? "Guardar cambios"
               : "Crear tarea"}
-        </button>
+        </Button>
         {onCancel && (
-          <button type="button" onClick={onCancel} disabled={isMutating}>
+          <Button type="button" onClick={onCancel} disabled={isMutating}>
             Cancelar
-          </button>
+          </Button>
         )}
       </form>
     </div>

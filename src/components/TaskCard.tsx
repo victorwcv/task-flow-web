@@ -1,6 +1,7 @@
 import type { TaskStatus } from "../domain/task/constants";
 import type { Task } from "../domain/task/types";
 import { TASK_STATUSES, TASK_STATUS_LABELS } from "../domain/task/constants";
+import { Button } from "./ui/Button";
 
 type TaskCardProps = {
   task: Task;
@@ -29,8 +30,8 @@ export const TaskCard = ({
           </option>
         ))}
       </select>
-      <button onClick={() => onDelete(task.id)}>❌</button>
-      <button onClick={() => onEdit(task)}>✏️</button>
+      <Button onClick={() => onDelete(task.id)}>Eliminar</Button>
+      <Button onClick={() => onEdit(task)}>Editar</Button>
     </div>
   );
 };
