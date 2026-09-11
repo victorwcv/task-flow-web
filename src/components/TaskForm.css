@@ -1,0 +1,39 @@
+.task-form-header {
+  margin-bottom: var(--stellan-spacing-section);
+}
+
+.task-form-eyebrow {
+  margin-bottom: var(--stellan-spacing-tight);
+
+  color: var(--stellan-color-primary);
+
+  font-size: var(--stellan-font-size-xs);
+  font-weight: var(--stellan-font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.task-form-title {
+  font-size: var(--stellan-font-size-xl);
+}
+
+.task-form-description {
+  margin-top: var(--stellan-spacing-tight);
+
+  color: var(--stellan-color-text-muted);
+  font-size: var(--stellan-font-size-sm);
+}
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stellan-spacing-section);
+}
+
+.task-form-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--stellan-spacing-tight);
+
+  padding-top: var(--stellan-spacing-tight);
+}

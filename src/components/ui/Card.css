@@ -1,0 +1,9 @@
+.stellan-card {
+  padding: var(--stellan-spacing-section);
+
+  border: 1px solid var(--stellan-color-border);
+  border-radius: var(--stellan-radius-lg);
+
+  background: var(--stellan-color-surface);
+  box-shadow: var(--stellan-shadow-sm);
+}

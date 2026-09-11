@@ -2,8 +2,10 @@ import type { SubmitEvent } from "react";
 import { useState } from "react";
 import type { Task, TaskFormValues } from "../domain/task/types";
 import { Button } from "./ui/Button";
+import { Card } from "./ui/Card";
 import { Input } from "./ui/Input";
 import { Textarea } from "./ui/Textarea";
+import "./TaskForm.css";
 
 type TaskFormProps = {
   editingTask: Task | null;
@@ -36,6 +38,7 @@ export const TaskForm = ({
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (!formData.title.trim()) {
       return;
     }
@@ -45,51 +48,80 @@ export const TaskForm = ({
     } else {
       onCreate(formData);
     }
-    setFormData({ title: "", description: "" });
+
+    setFormData({
+      title: "",
+      description: "",
+    });
+
     if (onCancel) {
       onCancel();
     }
   };
 
   return (
-    <div>
-      <h1>{isEditing ? "Editar tarea" : "Nueva tarea"}</h1>
-      <form onSubmit={handleSubmit}>
+    <Card>
+      <div className="task-form-header">
         <div>
-          <Input
-            disabled={isMutating}
-            label="Titulo"
-            helperText="Agrega el titulo de la tarea"
-            type="text"
-            id="title"
-            name="title"
-            value={formData.title}
-            onChange={(e) => handleChange("title", e.target.value)}
-          />
+          <p className="task-form-eyebrow">
+            {isEditing ? "Modificar" : "Crear"}
+          </p>
+
+          <h1 className="task-form-title">
+            {isEditing ? "Editar tarea" : "Nueva tarea"}
+          </h1>
+
+          <p className="task-form-description">
+            {isEditing
+              ? "Actualiza la información de esta tarea."
+              : "Crea una nueva tarea para mantener tu trabajo organizado."}
+          </p>
         </div>
-        <div>
-          <Textarea
-            label="Descripcion"
-            helperText="Opcionalmente agrega una descripcion"
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={(e) => handleChange("description", e.target.value)}
-          />
-        </div>
-        <Button type="submit" disabled={isMutating}>
-          {isMutating
-            ? "Guardando..."
-            : isEditing
-              ? "Guardar cambios"
-              : "Crear tarea"}
-        </Button>
-        {onCancel && (
-          <Button type="button" onClick={onCancel} disabled={isMutating}>
-            Cancelar
+      </div>
+
+      <form className="task-form" onSubmit={handleSubmit}>
+        <Input
+          disabled={isMutating}
+          label="Título"
+          helperText="Agrega el título de la tarea"
+          type="text"
+          id="title"
+          name="title"
+          value={formData.title}
+          onChange={(e) => handleChange("title", e.target.value)}
+        />
+
+        <Textarea
+          disabled={isMutating}
+          label="Descripción"
+          helperText="Opcionalmente agrega una descripción"
+          id="description"
+          name="description"
+          value={formData.description}
+          onChange={(e) => handleChange("description", e.target.value)}
+        />
+
+        <div className="task-form-actions">
+          <Button type="submit" disabled={isMutating}>
+            {isMutating
+              ? "Guardando..."
+              : isEditing
+                ? "Guardar cambios"
+                : "Crear tarea"}
           </Button>
-        )}
+
+          {onCancel && (
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={onCancel}
+              disabled={isMutating}
+            >
+              Cancelar
+            </Button>
+          )}
+        </div>
       </form>
-    </div>
+    </Card>
   );
 };
