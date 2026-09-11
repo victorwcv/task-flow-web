@@ -1,0 +1,72 @@
+.stellan-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stellan-spacing-tight);
+}
+
+.stellan-input-label {
+  color: var(--stellan-color-text);
+  font-size: var(--stellan-font-size-sm);
+  font-weight: var(--stellan-font-weight-medium);
+}
+
+.stellan-input {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 var(--stellan-spacing-default);
+
+  border: 1px solid var(--stellan-color-border);
+  border-radius: var(--stellan-radius-md);
+
+  background: var(--stellan-color-surface);
+  color: var(--stellan-color-text);
+
+  font-family: var(--stellan-font-family-base);
+  font-size: var(--stellan-font-size-sm);
+
+  transition:
+    border-color var(--stellan-transition-fast),
+    box-shadow var(--stellan-transition-fast),
+    background-color var(--stellan-transition-fast);
+}
+
+.stellan-input::placeholder {
+  color: var(--stellan-color-text-muted);
+}
+
+.stellan-input:hover:not(:disabled) {
+  border-color: var(--stellan-color-text-muted);
+}
+
+.stellan-input:focus {
+  border-color: var(--stellan-color-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(99 91 255 / 0.15);
+}
+
+.stellan-input:disabled {
+  background: var(--stellan-color-surface-subtle);
+  color: var(--stellan-color-text-muted);
+  cursor: not-allowed;
+}
+
+.stellan-input-danger {
+  border-color: var(--stellan-color-danger);
+}
+
+.stellan-input-danger:focus {
+  border-color: var(--stellan-color-danger);
+  box-shadow: 0 0 0 3px rgb(229 72 77 / 0.15);
+}
+
+.stellan-input-error {
+  color: var(--stellan-color-danger);
+  font-size: var(--stellan-font-size-xs);
+  line-height: var(--stellan-line-height-normal);
+}
+
+.stellan-input-helper-text {
+  color: var(--stellan-color-text-muted);
+  font-size: var(--stellan-font-size-xs);
+  line-height: var(--stellan-line-height-normal);
+}
