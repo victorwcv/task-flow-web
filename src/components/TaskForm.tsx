@@ -2,6 +2,8 @@ import type { SubmitEvent } from "react";
 import { useState } from "react";
 import type { Task, TaskFormValues } from "../domain/task/types";
 import { Button } from "./ui/Button";
+import { Input } from "./ui/Input";
+import { Textarea } from "./ui/Textarea";
 
 type TaskFormProps = {
   editingTask: Task | null;
@@ -54,8 +56,10 @@ export const TaskForm = ({
       <h1>{isEditing ? "Editar tarea" : "Nueva tarea"}</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="title">Titulo:</label>
-          <input
+          <Input
+            disabled={isMutating}
+            label="Titulo"
+            helperText="Agrega el titulo de la tarea"
             type="text"
             id="title"
             name="title"
@@ -64,8 +68,9 @@ export const TaskForm = ({
           />
         </div>
         <div>
-          <label htmlFor="description">Descripción:</label>
-          <textarea
+          <Textarea
+            label="Descripcion"
+            helperText="Opcionalmente agrega una descripcion"
             id="description"
             name="description"
             value={formData.description}
