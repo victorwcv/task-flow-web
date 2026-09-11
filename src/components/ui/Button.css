@@ -1,0 +1,106 @@
+.stellan-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--stellan-spacing-tight);
+
+  border: 1px solid transparent;
+  border-radius: var(--stellan-radius-md);
+
+  font-family: var(--stellan-font-family-base);
+  font-weight: var(--stellan-font-weight-medium);
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--stellan-transition-fast),
+    border-color var(--stellan-transition-fast),
+    color var(--stellan-transition-fast),
+    box-shadow var(--stellan-transition-fast);
+}
+
+/* =========================================================
+   Sizes
+   ========================================================= */
+
+.stellan-btn-sm {
+  min-height: 32px;
+  padding: 0 var(--stellan-spacing-compact);
+  font-size: var(--stellan-font-size-sm);
+}
+
+.stellan-btn-md {
+  min-height: 40px;
+  padding: 0 var(--stellan-spacing-default);
+  font-size: var(--stellan-font-size-sm);
+}
+
+.stellan-btn-lg {
+  min-height: 48px;
+  padding: 0 var(--stellan-spacing-section);
+  font-size: var(--stellan-font-size-md);
+}
+
+/* =========================================================
+   Primary
+   ========================================================= */
+
+.stellan-btn-primary {
+  background: var(--stellan-color-primary);
+  color: var(--stellan-color-surface);
+}
+
+.stellan-btn-primary:hover:not(:disabled) {
+  background: var(--stellan-color-primary-hover);
+}
+
+.stellan-btn-primary:active:not(:disabled) {
+  background: var(--stellan-color-primary-hover);
+  transform: translateY(1px);
+}
+
+/* =========================================================
+   Secondary
+   ========================================================= */
+
+.stellan-btn-secondary {
+  background: var(--stellan-color-surface);
+  border-color: var(--stellan-color-border);
+  color: var(--stellan-color-text);
+}
+
+.stellan-btn-secondary:hover:not(:disabled) {
+  background: var(--stellan-color-surface-subtle);
+}
+
+.stellan-btn-secondary:active:not(:disabled) {
+  background: var(--stellan-color-surface-subtle);
+  transform: translateY(1px);
+}
+
+/* =========================================================
+   Danger
+   ========================================================= */
+
+.stellan-btn-danger {
+  background: var(--stellan-color-danger);
+  color: var(--stellan-color-surface);
+}
+
+.stellan-btn-danger:hover:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+.stellan-btn-danger:active:not(:disabled) {
+  filter: brightness(0.88);
+  transform: translateY(1px);
+}
+
+/* =========================================================
+   Disabled
+   ========================================================= */
+
+.stellan-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
