@@ -1,0 +1,60 @@
+.task-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stellan-spacing-section);
+}
+
+.task-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stellan-spacing-tight);
+}
+
+.task-card-title {
+  color: var(--stellan-color-text);
+  font-size: var(--stellan-font-size-lg);
+  font-weight: var(--stellan-font-weight-semibold);
+}
+
+.task-card-description {
+  color: var(--stellan-color-text-muted);
+  font-size: var(--stellan-font-size-sm);
+  line-height: var(--stellan-line-height-normal);
+
+  overflow-wrap: anywhere;
+}
+
+.task-card-status {
+  max-width: 220px;
+}
+
+.task-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--stellan-spacing-tight);
+
+  padding-top: var(--stellan-spacing-tight);
+
+  border-top: 1px solid var(--stellan-color-border);
+}
+
+@media (max-width: 480px) {
+  .task-card-status {
+    max-width: none;
+  }
+
+  .task-card-actions {
+    justify-content: stretch;
+  }
+
+  .task-card-actions .stellan-btn {
+    flex: 1;
+  }
+}
