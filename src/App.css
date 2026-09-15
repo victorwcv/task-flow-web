@@ -1,4 +1,6 @@
 .app {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
 
@@ -56,6 +58,7 @@
 }
 
 .app-main {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: var(--stellan-spacing-major);
@@ -65,15 +68,16 @@
   padding-bottom: var(--stellan-spacing-major);
 }
 
-.app-form-section {
-  width: min(680px, 100%);
-  margin: 0 auto;
-}
-
 .tasks-section {
   display: flex;
   flex-direction: column;
   gap: var(--stellan-spacing-section);
+}
+
+.tasks-section-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--stellan-spacing-compact);
 }
 
 .tasks-section-header {
@@ -174,25 +178,13 @@
 }
 
 @media (max-width: 480px) {
-  .app-header {
-    width: min(100% - 24px, 1120px);
-    padding: var(--stellan-spacing-section) 0;
+  .tasks-section-header {
+    align-items: flex-start;
+    gap: var(--stellan-spacing-compact);
   }
 
-  .app-main {
-    width: min(100% - 24px, 1120px);
-    gap: var(--stellan-spacing-large);
-  }
-
-  .app-footer {
-    width: min(100% - 24px, 1120px);
-
-    flex-direction: column;
-    gap: var(--stellan-spacing-tight);
-  }
-
-  .task-state {
-    align-items: stretch;
-    flex-direction: column;
+  .tasks-section-actions {
+    flex-direction: column-reverse;
+    align-items: flex-end;
   }
 }

@@ -1,5 +1,5 @@
 import type { SubmitEvent } from "react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Task, TaskFormValues } from "../domain/task/types";
 import { Button } from "./ui/Button";
 import { Card } from "./ui/Card";
@@ -28,6 +28,15 @@ export const TaskForm = ({
   });
 
   const isEditing = editingTask !== null;
+  const titleInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      titleInputRef.current?.focus();
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   const handleChange = <K extends keyof TaskFormValues>(
     key: K,
@@ -81,6 +90,7 @@ export const TaskForm = ({
 
       <form className="task-form" onSubmit={handleSubmit}>
         <Input
+          ref={titleInputRef}
           disabled={isMutating}
           label="Título"
           helperText="Agrega el título de la tarea"

@@ -1,0 +1,45 @@
+.task-dialog {
+  width: min(560px, calc(100% - 32px));
+  max-height: calc(100vh - 48px);
+  padding: 0;
+  border: 1px solid var(--stellan-color-border);
+  border-radius: var(--stellan-radius-lg);
+  background: var(--stellan-color-background);
+  color: var(--stellan-color-text);
+  box-shadow: var(--stellan-shadow-lg);
+}
+
+.task-dialog::backdrop {
+  background: rgb(23 26 36 / 0.45);
+  backdrop-filter: blur(3px);
+}
+
+.task-dialog-content {
+  padding: var(--stellan-spacing-large);
+  overflow-y: auto;
+}
+
+.task-dialog-close {
+  position: absolute;
+  right: var(--stellan-spacing-large);
+  top: var(--stellan-spacing-large);
+  margin-bottom: var(--stellan-spacing-tight);
+}
+
+.task-dialog-content .stellan-card {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+@media (max-width: 480px) {
+  .task-dialog {
+    width: calc(100% - 24px);
+    max-height: calc(100vh - 24px);
+  }
+
+  .task-dialog-content {
+    padding: var(--stellan-spacing-section);
+  }
+}

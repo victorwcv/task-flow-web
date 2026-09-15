@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { Button } from "./components/ui/Button";
 import { Card } from "./components/ui/Card";
-import { TaskForm } from "./components/TaskForm";
+import { TaskDialog } from "./components/TaskDialog";
 import { TaskCard } from "./components/TaskCard";
+import { TaskForm } from "./components/TaskForm";
 import type { Task } from "./domain/task/types";
 import { useTasks } from "./hooks/useTasks";
 import "./App.css";
 
 function App() {
   const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [isTaskDialogOpen, setIsTaskDialogOpen] = useState(false);
 
   const {
     tasks,
@@ -22,8 +24,19 @@ function App() {
     updateStatus,
   } = useTasks();
 
+  const handleCreate = () => {
+    setEditingTask(null);
+    setIsTaskDialogOpen(true);
+  };
+
   const handleEdit = (task: Task) => {
     setEditingTask(task);
+    setIsTaskDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsTaskDialogOpen(false);
+    setEditingTask(null);
   };
 
   const renderLoading = () => {
@@ -65,6 +78,8 @@ function App() {
             No tienes tareas todavía. Crea la primera para comenzar a organizar
             tu trabajo.
           </p>
+
+          <Button onClick={handleCreate}>+ Nueva tarea</Button>
         </div>
       </Card>
     );
@@ -107,17 +122,6 @@ function App() {
       </header>
 
       <main className="app-main">
-        <section className="app-form-section">
-          <TaskForm
-            key={editingTask?.id ?? "create"}
-            onCreate={createElement}
-            onEdit={updateElement}
-            onCancel={editingTask ? () => setEditingTask(null) : undefined}
-            editingTask={editingTask}
-            isMutating={isMutating}
-          />
-        </section>
-
         <section className="tasks-section">
           <div className="tasks-section-header">
             <div>
@@ -126,7 +130,11 @@ function App() {
               <h2 className="tasks-section-title">Tus tareas</h2>
             </div>
 
-            <span className="tasks-count">{tasks.length}</span>
+            <div className="tasks-section-actions">
+              <span className="tasks-count">{tasks.length}</span>
+
+              <Button onClick={handleCreate}>+ Nueva tarea</Button>
+            </div>
           </div>
 
           {isLoading ? renderLoading() : error ? renderError() : renderTasks()}
@@ -137,6 +145,19 @@ function App() {
         <span>TaskFlow</span>
         <span>Built with React + TypeScript</span>
       </footer>
+
+      {isTaskDialogOpen && (
+        <TaskDialog onClose={handleCloseDialog} closeDisabled={isMutating}>
+          <TaskForm
+            key={editingTask?.id ?? "create"}
+            editingTask={editingTask}
+            isMutating={isMutating}
+            onCreate={createElement}
+            onEdit={updateElement}
+            onCancel={handleCloseDialog}
+          />
+        </TaskDialog>
+      )}
     </div>
   );
 }
