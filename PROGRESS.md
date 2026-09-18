@@ -1,171 +1,385 @@
-# TaskFlow Web — Progress
+# TaskFlow Web — Progreso
 
-> Living project state used to resume development across sessions.
->
-> Update this file when a milestone, decision or current focus changes.
+> Estado vivo del proyecto utilizado para retomar el desarrollo entre sesiones.
 
----
-
-## Current State
-
-**Stage:** 2 — API Integration
-**Milestone:** Type-safe API client
-**Status:** 🟢 Completed
-**Next:** React + Advanced TypeScript
+> Actualiza este archivo cuando cambie un hito, una decisión arquitectónica o el enfoque actual.
 
 ---
 
-## Roadmap
+## Estado Actual
 
-### Stage 1 — TypeScript Foundations ✅
+**Etapa:** 6 — Lanzamiento v1.0
 
-- [x] React + TypeScript project setup
-- [x] Component props
-- [x] Union types
-- [x] Domain type composition
-- [x] API response vs frontend model
-- [x] `Omit` utility type
-- [x] Data mapping (`TaskResponse` → `Task`)
-- [x] Initial frontend structure
+**Hito:** TaskFlow Web v1.0.0
+
+**Estado:** 🟢 Completado
+
+**Enfoque actual:** Lanzamiento completado. El trabajo futuro debe estar impulsado por necesidades reales del producto en lugar de añadir funcionalidades por el simple hecho de aumentar la complejidad.
 
 ---
 
-### Stage 2 — API Integration ✅
+## Hoja de Ruta
 
-- [x] Typed `fetch` client
-- [x] Generic API methods
-- [x] GET / POST integration
-- [x] API error modeling
-- [x] Runtime response validation with Zod
-- [x] Error handling
-- [x] API → Domain mapping
-- [x] Domain / API separation
-- [x] CORS configuration
-- [x] API integration tests
-- [x] Production build validation
+### Etapa 1 — Fundamentos de TypeScript ✅
+
+- [x] Configuración del proyecto React + TypeScript
+- [x] Props de componentes
+- [x] Tipos unión
+- [x] Composición de tipos de dominio
+- [x] Respuesta de API vs modelo de frontend
+- [x] Tipo de utilidad `Omit`
+- [x] Mapeo de datos (`TaskResponse` → `Task`)
+- [x] Estructura inicial del frontend
 
 ---
 
-### Stage 3 — Functional Frontend 🚧
+### Etapa 2 — Integración con la API ✅
 
-**Objective:** Complete TaskFlow Web as a functional frontend connected to the API.
+- [x] Cliente `fetch` tipado
+- [x] Métodos de API genéricos
+- [x] Integración GET / POST
+- [x] Integración PATCH / DELETE
+- [x] Modelado de errores de API
+- [x] Validación de respuestas en tiempo de ejecución con Zod
+- [x] Manejo de errores
+- [x] Mapeo API → Dominio
+- [x] Separación Dominio / API
+- [x] Configuración de CORS
+- [x] Pruebas de integración de la API
+- [x] Validación del build de producción
 
-### Task Management
+---
 
-- [x] List tasks
-- [x] Create task
-- [ ] Delete task
-- [ ] Edit task
-- [ ] Change task status
-- [ ] Refresh / synchronize task list
+### Etapa 3 — Frontend Funcional ✅
 
-### UI States
+**Objetivo:** Completar TaskFlow Web como un frontend funcional conectado a la API.
 
-- [ ] Loading state
-- [ ] Error state
-- [ ] Empty state
-- [ ] Form validation
-- [ ] Success feedback
-- [ ] Action feedback
+#### Gestión de Tareas
 
-### React + TypeScript
+- [x] Listar tareas
+- [x] Crear tarea
+- [x] Eliminar tarea
+- [x] Editar tarea
+- [x] Cambiar el estado de una tarea
+- [x] Refrescar / sincronizar la lista de tareas
+- [x] Persistir cambios de estado a través de la API
 
-Apply advanced TypeScript concepts only when they solve real problems during implementation.
+#### Estados de UI
 
-- [x] Typed forms
-- [x] Event typing
+- [x] Estado de carga
+- [x] Estado de error
+- [x] Estado vacío
+- [x] Validación de formularios
+- [x] Estado de mutación
+- [x] Reintento tras errores de carga
+
+#### React + TypeScript
+
+- [x] Formularios tipados
+- [x] Tipado de eventos
 - [x] Type guards
-- [x] Derived types
-- [x] Generics
-- [ ] Advanced component props where useful
-- [ ] Derived UI state
-- [ ] Typed UI state management
+- [x] Tipos derivados
+- [x] Genéricos
+- [x] Composición de props de componentes
+- [x] Estado de UI derivado
+- [x] Gestión de estado de UI tipada
 
 ---
 
-## Stage 4 — Frontend Architecture
+### Etapa 4 — Arquitectura del Frontend ✅
 
-**Objective:** Refactor and improve the architecture based on real problems discovered while building the application.
+**Objetivo:** Establecer responsabilidades claras entre la UI, el estado del dominio y la comunicación con la API sin introducir abstracciones innecesarias.
 
-- [ ] Review component responsibilities
-- [ ] Review domain / API boundaries
-- [ ] Extract reusable hooks where justified
-- [ ] Server state management
-- [ ] Cache / refetch strategy
-- [ ] Evaluate TanStack Query or another solution if justified
-- [ ] Improve API client where necessary
-- [ ] Review API contracts
-- [ ] Shared API contracts
-- [ ] Generated types
-- [ ] Final architectural review
+- [x] Revisar las responsabilidades de los componentes
+- [x] Separar componentes de UI de la comunicación con la API
+- [x] Introducir `useTasks` para el estado de la colección de tareas y las mutaciones
+- [x] Centralizar las operaciones de la API de tareas
+- [x] Mantener los modelos de API separados de los modelos de dominio
+- [x] Mantener aislado el mapeo de la API
+- [x] Centralizar el manejo de errores de la API
+- [x] Cliente de API genérico y tipado
+- [x] Validación en tiempo de ejecución en el límite de la API
+- [x] Revisar los contratos de la API
+- [x] Estructura del frontend orientada a producción
+- [x] Revisión arquitectónica final para v1
 
-> Do not introduce abstractions, libraries, or architectural patterns before there is a real problem that justifies them.
+> Bibliotecas de estado del servidor como TanStack Query se omitieron intencionalmente porque la aplicación actual no tiene la complejidad suficiente para justificarlas.
+
+> Las abstracciones se introdujeron solo cuando apareció un problema real durante el desarrollo.
 
 ---
 
-## Stage 5 — Production Polish
+### Etapa 5 — UI / Desarrollo de Producto ✅
 
-**Objective:** Prepare TaskFlow Web for real-world usage and deployment.
+**Objetivo:** Evolucionar el frontend funcional hacia una experiencia de producto coherente.
+
+#### Sistema de Diseño Stellan
+
+- [x] Definir la identidad visual de Stellan
+- [x] Tokens de diseño
+- [x] Tokens de color
+- [x] Tokens de espaciado
+- [x] Tokens de tipografía
+- [x] Tokens de radio
+- [x] Tokens de sombras
+- [x] Tokens de transiciones
+- [x] Componente Button
+- [x] Componente Input
+- [x] Componente Textarea
+- [x] Componente Select
+- [x] Componente Badge
+- [x] Componente Card
+- [x] Componente Dialog
+- [x] Estados de foco
+- [x] Estados de interacción consistentes
+
+#### UI de TaskFlow
+
+- [x] Tablero de tareas
+- [x] Diseño Kanban de tres columnas
+- [x] Tarjetas de tareas
+- [x] Formulario de tarea
+- [x] Diálogo de tarea
+- [x] UI de carga / error / vacío
+- [x] Diseño responsive
+- [x] Acciones de tarea basadas en iconos
+- [x] Metadatos de tarea
+- [x] Pulido de jerarquía visual y espaciado
+
+---
+
+### Etapa 6 — Drag & Drop ✅
+
+**Objetivo:** Proporcionar una forma intuitiva de cambiar el estado de las tareas mediante manipulación directa.
+
+- [x] Evaluar Drag & Drop nativo de HTML5
+- [x] Evaluar opciones de librerías modernas de DnD
+- [x] Integrar `@dnd-kit/react`
+- [x] Hacer arrastrables las tarjetas de tareas
+- [x] Hacer soltables las columnas de tareas
+- [x] Detectar origen y destino
+- [x] Persistir cambios de estado a través de la API existente
+- [x] Evitar llamadas innecesarias a la API al soltar en la misma columna
+- [x] Añadir `DragOverlay`
+- [x] Mantener la tarjeta original como marcador visual durante el arrastre
+- [x] Mantener la tarjeta del overlay visualmente distinta
+- [x] Manejar operaciones de arrastre canceladas
+- [x] Verificar la persistencia tras recargar la página
+
+> La reordenación de tareas dentro de la misma columna se dejó intencionalmente fuera de v1. Requeriría un modelo de ordenación y una estrategia de persistencia separados.
+
+---
+
+## Etapa 7 — Producción / Futuro 🚧
+
+El trabajo futuro debe estar impulsado por necesidades reales del producto descubiertas tras usar TaskFlow, en lugar de añadir funcionalidades únicamente para aumentar la complejidad técnica.
 
 ### UX / UI
 
-- [ ] UI polish
-- [ ] Responsive design
-- [ ] Accessibility
-- [ ] Confirmation dialogs
-- [ ] Improved loading states
-- [ ] Improved error handling
-- [ ] Notifications / feedback
+- [ ] Más pulido de UI basado en el uso real
+- [ ] Auditoría de accesibilidad
+- [ ] Mejor feedback / notificaciones
+- [ ] Comportamiento responsive avanzado si es necesario
+- [ ] Modo oscuro si está justificado
+
+### Funcionalidades de Producto
+
+- [ ] Ordenación de tareas dentro de las columnas
+- [ ] Búsqueda
+- [ ] Filtrado
+- [ ] Detalles de tarea
+- [ ] Autenticación
+- [ ] Tareas específicas por usuario
+- [ ] Metadatos adicionales de tarea
 
 ### Testing
 
-- [ ] Component tests
-- [ ] Integration tests
-- [ ] End-to-end tests
+- [ ] Ampliar las pruebas de componentes donde sea útil
+- [ ] Ampliar la cobertura de pruebas de integración
+- [ ] Pruebas end-to-end
 
-### Production
+### Producción
 
-- [ ] Environment variables
-- [ ] Production configuration
-- [ ] Production build
-- [ ] Docker
-- [ ] Deployment
-- [ ] Final README
+- [ ] Configuración específica por entorno
+- [ ] Despliegue en producción
+- [ ] Monitorización / logging
+- [ ] Revisión de rendimiento
+
+> Estos elementos intencionalmente no forman parte de v1.0.0.
 
 ---
 
-## Current Technical State
+## Estado Técnico Actual
 
-The frontend currently has:
+El frontend utiliza actualmente:
 
-- React 19 + TypeScript
+- React 19
+- TypeScript
 - Vite
+- pnpm
+- Zod
+- Lucide React
+- `@dnd-kit/react`
+- Vitest
+
+### Dominio
+
 - `TaskStatus`
-- `TaskResponse`
 - `Task`
 - `TaskFormValues`
-- `mapTask()`
-- Initial `TaskCard` component
+- Constantes y etiquetas de estado de tarea
 
-The next major goal is connecting the frontend to **TaskFlow API** through a type-safe API client.
+### API
+
+- Cliente de API tipado
+- Métodos genéricos GET / POST / PATCH / DELETE
+- Esquemas de respuesta Zod
+- Modelado de errores de API
+- Módulo de API de tareas
+- Mappers API → Dominio
+
+### Estado
+
+`useTasks` gestiona:
+
+- Colección de tareas
+- Estado de carga
+- Estado de error
+- Estado de mutación
+- Refetch
+- Crear
+- Actualizar
+- Eliminar
+- Cambios de estado
+
+### UI
+
+La aplicación incluye actualmente:
+
+- TaskBoard
+- TaskColumn
+- TaskCard
+- TaskForm
+- TaskDialog
+- Primitivas UI de Stellan
 
 ---
 
-## Technical Decisions
+## Decisiones Técnicas
 
-### Stage 1 — Key Decisions
+### Etapa 1 — Fundamentos de TypeScript
 
-- Domain models are kept separate from API response models.
-- `TaskResponse` represents the external API contract, while `Task` represents the frontend domain model.
-- `Omit` is used to compose `Task` from `TaskResponse` while replacing date fields with `Date`.
-- API date strings are converted into `Date` objects through a dedicated `mapTask()` function.
-- `TaskStatus` uses a union type to restrict valid task states.
-- The initial frontend structure remains minimal, adding folders only when a responsibility requires them.
+- Los modelos de dominio se mantienen separados de los modelos de respuesta de la API.
+- `TaskResponse` representa el contrato externo de la API, mientras que `Task` representa el modelo de dominio del frontend.
+- Se utiliza `Omit` para componer `Task` a partir de `TaskResponse`, reemplazando los campos de fecha por `Date`.
+- Las cadenas de fecha de la API se convierten en objetos `Date` a través de una función dedicada `mapTask()`.
+- `TaskStatus` utiliza un tipo unión para restringir los estados válidos de una tarea.
+- La estructura inicial del frontend se mantiene mínima, añadiendo carpetas solo cuando una responsabilidad lo requiere.
 
-### Stage 2 — Key Decisions
+### Etapa 2 — Integración con la API
 
-- API responses are validated at runtime with Zod.
-- Zod schemas are the source of truth for external response types.
-- Generic `get()` infers its return type from the provided schema.
-- API models (`TaskResponse`) are mapped into frontend models (`Task`).
-- HTTP errors are represented by `ApiError`.
+- Las respuestas de la API se validan en tiempo de ejecución con Zod.
+- Los esquemas de Zod son la fuente de verdad para los tipos de respuesta externos.
+- Los métodos genéricos de la API infieren su tipo de retorno a partir del esquema proporcionado.
+- Los modelos de API (`TaskResponse`) se mapean a modelos de frontend (`Task`).
+- Los errores HTTP se representan mediante `ApiError`.
+- Los datos externos de la API se tratan como entrada no confiable en el límite de la aplicación.
+
+### Etapa 3 — Frontend Funcional
+
+- `useTasks` gestiona el estado de la colección de tareas y las mutaciones de tareas.
+- Los componentes de UI no se comunican directamente con la API.
+- `App` gestiona el estado de UI de alto nivel, como la tarea activa que se está editando y la visibilidad del diálogo.
+- El estado del formulario permanece dentro de `TaskForm`.
+- `TaskDialog` gestiona la presentación modal y utiliza composición mediante `children` en lugar de prop drilling.
+- El estado de mutación se comparte con los elementos de UI relevantes para evitar acciones conflictivas.
+
+### Etapa 4 — Arquitectura del Frontend
+
+- La comunicación con la API está aislada de los componentes de presentación.
+- La lógica de dominio está separada de los contratos de la API.
+- Los mappers aíslan las transformaciones de datos externos.
+- Las abstracciones reutilizables se introducen solo después de que aparece una necesidad concreta.
+- Las bibliotecas de estado del servidor se evitaron intencionalmente en v1 porque los requisitos actuales de gestión de estado son lo suficientemente pequeños para los hooks de React.
+- Se prefieren las APIs nativas del navegador y de JavaScript cuando resuelven el problema de forma adecuada.
+
+### Etapa 5 — Sistema de Diseño Stellan
+
+- Stellan es la identidad del sistema de diseño detrás de TaskFlow, mientras que TaskFlow sigue siendo la identidad del producto.
+- Los tokens de diseño están centralizados bajo el namespace `--stellan-*`.
+- El sistema de diseño se mantiene intencionalmente pequeño y orientado al producto.
+- Los componentes se extraen cuando un patrón de UI se vuelve reutilizable o se beneficia de un contrato consistente.
+- El pulido visual se maneja a través de tokens y estilos a nivel de componente, en lugar de valores arbitrarios puntuales, siempre que exista un patrón repetido.
+
+### Etapa 6 — Drag & Drop
+
+- Se seleccionó `@dnd-kit/react` en lugar de implementar la interacción manualmente.
+- `TaskCard` utiliza `useDraggable`.
+- `TaskColumn` utiliza `useDroppable`.
+- `DragDropProvider` coordina la operación de arrastre.
+- `DragOverlay` proporciona la representación visual durante el arrastre.
+- Soltar una tarea en el mismo estado no dispara una petición PATCH innecesaria.
+- La reordenación dentro de una columna se excluyó intencionalmente porque introduce una preocupación de persistencia separada (`position` / ordenación).
+
+### React 19
+
+- Se utiliza el comportamiento de `ref`-como-prop de React 19 donde aplica.
+- Se evita `forwardRef` para componentes nuevos cuando una prop `ref` normal es suficiente.
+- Los componentes se mantienen compatibles con las convenciones de React 19.
+
+---
+
+## Historial de Lanzamientos
+
+### v1.0.0 — TaskFlow Web
+
+**Estado:** 🟢 Lanzado
+
+La primera versión completa de TaskFlow Web.
+
+El lanzamiento incluye:
+
+- CRUD completo de tareas
+- Persistencia en PostgreSQL
+- Integración con la API de Fastify
+- Validación en tiempo de ejecución
+- Cliente de API tipado
+- Separación Dominio / API
+- Gestión del estado de tareas
+- Tablero Kanban
+- Transiciones de estado con Drag & Drop
+- DragOverlay
+- Sistema de diseño Stellan
+- Estados de carga / error / vacío
+- Validación de formularios
+- UI responsive
+- Pruebas
+- Desarrollo local de base de datos basado en Docker
+
+Etiqueta de Git:
+
+```text
+v1.0.0
+```
+
+---
+
+## Filosofía de Desarrollo
+
+TaskFlow sigue un principio simple:
+
+> **Introduce complejidad cuando el producto tenga una razón para necesitarla.**
+
+El objetivo no es demostrar cada característica de TypeScript, patrón de React o librería disponible.
+
+El objetivo es construir una aplicación real tomando decisiones de ingeniería deliberadas, entendiendo los trade-offs detrás de ellas e introduciendo abstracciones solo cuando resuelven un problema real.
+
+---
+
+## Próximo Hito
+
+**TaskFlow v1.1 — Por definir**
+
+Actualmente no hay ninguna funcionalidad comprometida para v1.1.
+
+La próxima iteración debe basarse en el uso real y en las necesidades observadas del producto, en lugar de una lista predefinida de funcionalidades.
