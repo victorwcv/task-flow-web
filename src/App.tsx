@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Button } from "./components/ui/Button";
 import { Card } from "./components/ui/Card";
 import { TaskDialog } from "./components/TaskDialog";
-import { TaskCard } from "./components/TaskCard";
 import { TaskForm } from "./components/TaskForm";
 import type { Task } from "./domain/task/types";
 import { useTasks } from "./hooks/useTasks";
+import { TaskBoard } from "./components/TaskBoard";
 import "./App.css";
 
 function App() {
@@ -91,18 +91,13 @@ function App() {
     }
 
     return (
-      <div className="task-list">
-        {tasks.map((task) => (
-          <TaskCard
-            key={task.id}
-            task={task}
-            isMutating={isMutating}
-            onDelete={deleteElement}
-            onEdit={handleEdit}
-            onStatusChange={updateStatus}
-          />
-        ))}
-      </div>
+      <TaskBoard
+        tasks={tasks}
+        isMutating={isMutating}
+        onDelete={deleteElement}
+        onEdit={handleEdit}
+        onStatusChange={updateStatus}
+      />
     );
   };
 
