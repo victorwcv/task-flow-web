@@ -71,7 +71,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  gap: var(--stellan-spacing-section);
 }
 
 .tasks-section-actions {
@@ -85,6 +84,7 @@
   align-items: flex-end;
   justify-content: space-between;
   flex-shrink: 0;
+  padding-bottom: var(--stellan-spacing-tight);
 }
 
 .tasks-section-title {

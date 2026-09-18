@@ -1,6 +1,6 @@
 import type { TaskStatus } from "../domain/task/constants";
 import { TASK_STATUSES, TASK_STATUS_LABELS } from "../domain/task/constants";
-import { DragDropProvider } from "@dnd-kit/react";
+import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
 import type { Task } from "../domain/task/types";
 import { TaskCard } from "./TaskCard";
 import "./TaskBoard.css";
@@ -32,6 +32,9 @@ export const TaskBoard = ({
 
         const taskId = String(source?.id);
         const newStatus = target.id as TaskStatus;
+        const task = tasks.find((task) => task.id === taskId);
+
+        if (!task || task.status === newStatus) return;
 
         onStatusChange(taskId, newStatus);
       }}
@@ -72,6 +75,24 @@ export const TaskBoard = ({
           );
         })}
       </div>
+
+      <DragOverlay>
+        {(source) => {
+          const task = tasks.find((task) => task.id === String(source.id));
+
+          if (!task) return null;
+
+          return (
+            <TaskCard
+              task={task}
+              isMutating={isMutating}
+              onDelete={onDelete}
+              onEdit={onEdit}
+              onStatusChange={onStatusChange}
+            />
+          );
+        }}
+      </DragOverlay>
     </DragDropProvider>
   );
 };
