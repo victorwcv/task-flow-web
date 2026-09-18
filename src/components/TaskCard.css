@@ -1,33 +1,47 @@
 .task-card {
   display: flex;
   flex-direction: column;
-  gap: var(--stellan-spacing-section);
+  min-height: 220px;
 }
 
 .task-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  margin-bottom: var(--stellan-spacing-tight);
 }
 
 .task-card-content {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: var(--stellan-spacing-tight);
+  min-height: 0;
 }
 
 .task-card-title {
+  display: -webkit-box;
+  line-clamp: 2;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
   color: var(--stellan-color-text);
   font-size: var(--stellan-font-size-lg);
   font-weight: var(--stellan-font-weight-semibold);
 }
 
 .task-card-description {
+  display: -webkit-box;
+  line-clamp: 3;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+
   color: var(--stellan-color-text-muted);
   font-size: var(--stellan-font-size-sm);
   line-height: var(--stellan-line-height-normal);
-
-  overflow-wrap: anywhere;
 }
 
 .task-card-status {
@@ -38,11 +52,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--stellan-spacing-tight);
-
-  padding-top: var(--stellan-spacing-tight);
-
-  border-top: 1px solid var(--stellan-color-border);
+  gap: var(--stellan-spacing-micro);
 }
 
 @media (max-width: 480px) {

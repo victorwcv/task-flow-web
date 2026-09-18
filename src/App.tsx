@@ -6,6 +6,7 @@ import { TaskForm } from "./components/TaskForm";
 import type { Task } from "./domain/task/types";
 import { useTasks } from "./hooks/useTasks";
 import { TaskBoard } from "./components/TaskBoard";
+import { Plus } from "lucide-react";
 import "./App.css";
 
 function App() {
@@ -79,7 +80,10 @@ function App() {
             tu trabajo.
           </p>
 
-          <Button onClick={handleCreate}>+ Nueva tarea</Button>
+          <Button onClick={handleCreate}>
+            <Plus size={16} />
+            Nueva tarea
+          </Button>
         </div>
       </Card>
     );
@@ -128,7 +132,10 @@ function App() {
             <div className="tasks-section-actions">
               <span className="tasks-count">{tasks.length}</span>
 
-              <Button onClick={handleCreate}>+ Nueva tarea</Button>
+              <Button onClick={handleCreate}>
+                <Plus size={16} />
+                Nueva tarea
+              </Button>
             </div>
           </div>
 

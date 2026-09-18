@@ -104,3 +104,25 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.stellan-btn-danger.stellan-btn-icon {
+  background: transparent;
+  border-color: transparent;
+  color: var(--stellan-color-danger);
+}
+
+.stellan-btn-secondary.stellan-btn-icon {
+  background: transparent;
+  border-color: transparent;
+  color: var(--stellan-color-text-muted);
+}
+
+.stellan-btn-primary.stellan-btn-icon {
+  background: transparent;
+  border-color: transparent;
+  color: var(--stellan-color-primary);
+}
+
+.stellan-btn-danger.stellan-btn-icon:hover:not(:disabled) {
+  background: rgb(229 72 77 / 0.1);
+}

@@ -5,6 +5,7 @@ import { Badge } from "./ui/Badge";
 import { Button } from "./ui/Button";
 import { Card } from "./ui/Card";
 import { Select } from "./ui/Select";
+import { Pencil, Trash2 } from "lucide-react";
 import "./TaskCard.css";
 
 type TaskCardProps = {
@@ -32,9 +33,32 @@ export const TaskCard = ({
     <Card>
       <article className="task-card">
         <div className="task-card-header">
-          <Badge variant={statusVariant[task.status]}>
+          <Badge variant={statusVariant[task.status]} size="sm">
             {TASK_STATUS_LABELS[task.status].label}
           </Badge>
+          <div className="task-card-actions">
+            <Button
+              variant="secondary"
+              appearance="icon"
+              size="sm"
+              aria-label={`Editar ${task.title}`}
+              title="Editar"
+              onClick={() => onEdit(task)}
+            >
+              <Pencil size={16} />
+            </Button>
+
+            <Button
+              variant="danger"
+              appearance="icon"
+              size="sm"
+              aria-label={`Eliminar ${task.title}`}
+              title="Eliminar"
+              onClick={() => onDelete(task.id)}
+            >
+              <Trash2 size={16} />
+            </Button>
+          </div>
         </div>
 
         <div className="task-card-content">
@@ -60,24 +84,6 @@ export const TaskCard = ({
               </option>
             ))}
           </Select>
-        </div>
-
-        <div className="task-card-actions">
-          <Button
-            variant="secondary"
-            onClick={() => onEdit(task)}
-            disabled={isMutating}
-          >
-            Editar
-          </Button>
-
-          <Button
-            variant="danger"
-            onClick={() => onDelete(task.id)}
-            disabled={isMutating}
-          >
-            Eliminar
-          </Button>
         </div>
       </article>
     </Card>

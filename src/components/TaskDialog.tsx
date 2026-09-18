@@ -1,6 +1,7 @@
 import type { MouseEvent, ReactNode } from "react";
 import { useEffect, useRef } from "react";
 import { Button } from "./ui/Button";
+import { X } from "lucide-react";
 import "./TaskDialog.css";
 
 type TaskDialogProps = {
@@ -70,10 +71,11 @@ export const TaskDialog = ({
             variant="secondary"
             size="sm"
             aria-label="Cerrar"
+            title="Cerrar"
             onClick={handleClose}
             disabled={closeDisabled}
           >
-            ×
+            <X size={16} />
           </Button>
         </div>
 
