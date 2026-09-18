@@ -67,7 +67,6 @@ export const TaskBoard = ({
                     isMutating={isMutating}
                     onDelete={onDelete}
                     onEdit={onEdit}
-                    onStatusChange={onStatusChange}
                   />
                 ))}
               </div>
@@ -83,13 +82,15 @@ export const TaskBoard = ({
           if (!task) return null;
 
           return (
-            <TaskCard
-              task={task}
-              isMutating={isMutating}
-              onDelete={onDelete}
-              onEdit={onEdit}
-              onStatusChange={onStatusChange}
-            />
+            <div className="task-card-overlay">
+              <TaskCard
+                dragCard={true}
+                task={task}
+                isMutating={isMutating}
+                onDelete={onDelete}
+                onEdit={onEdit}
+              />
+            </div>
           );
         }}
       </DragOverlay>

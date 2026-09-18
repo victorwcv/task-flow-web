@@ -11,7 +11,7 @@
   justify-content: space-between;
   flex-shrink: 0;
 
-  width: min(1120px, calc(100% - 32px));
+  width: min(1280px, calc(100% - 32px));
   margin: 0 auto;
   padding: var(--stellan-spacing-large) 0;
 }
@@ -62,7 +62,7 @@
 .app-main {
   flex: 1;
   min-height: 0;
-  width: min(1120px, calc(100% - 32px));
+  width: min(1280px, calc(100% - 32px));
   margin: 0 auto;
   padding-bottom: var(--stellan-spacing-section);
 }
@@ -154,7 +154,7 @@
   display: flex;
   justify-content: space-between;
 
-  width: min(1120px, calc(100% - 32px));
+  width: min(1280px, calc(100% - 32px));
   margin: 0 auto;
   padding: var(--stellan-spacing-section) 0;
 

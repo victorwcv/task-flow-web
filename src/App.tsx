@@ -144,7 +144,9 @@ function App() {
       </main>
 
       <footer className="app-footer">
-        <span>TaskFlow</span>
+        <span>
+          TaskFlow by <i>Victor Ccanchi</i> &copy; {new Date().getFullYear()}.
+        </span>
         <span>Built with React + TypeScript</span>
       </footer>
 

@@ -1,7 +1,7 @@
 .task-card {
   display: flex;
   flex-direction: column;
-  min-height: 220px;
+  min-height: 180px;
 }
 
 .task-card-header {
@@ -18,6 +18,15 @@
   flex-direction: column;
   gap: var(--stellan-spacing-tight);
   min-height: 0;
+}
+
+.task-card-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-top: var(--stellan-spacing-compact);
+  color: var(--stellan-color-text-muted);
+  font-size: var(--stellan-font-size-xs);
 }
 
 .task-card-title {
@@ -53,6 +62,10 @@
   align-items: center;
   justify-content: flex-end;
   gap: var(--stellan-spacing-micro);
+}
+
+.task-card-dragging {
+  opacity: 0.35;
 }
 
 @media (max-width: 480px) {
