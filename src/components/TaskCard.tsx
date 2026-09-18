@@ -6,6 +6,7 @@ import { Button } from "./ui/Button";
 import { Card } from "./ui/Card";
 import { Select } from "./ui/Select";
 import { Pencil, Trash2 } from "lucide-react";
+import { useDraggable } from "@dnd-kit/react";
 import "./TaskCard.css";
 
 type TaskCardProps = {
@@ -29,8 +30,12 @@ export const TaskCard = ({
     done: "success",
   } as const;
 
+  const { ref } = useDraggable({
+    id: task.id,
+  });
+
   return (
-    <Card>
+    <Card ref={ref}>
       <article className="task-card">
         <div className="task-card-header">
           <Badge variant={statusVariant[task.status]} size="sm">
